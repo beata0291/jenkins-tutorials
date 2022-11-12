@@ -1,9 +1,16 @@
 pipeline {
   agent any
   stages {
-    stage('') {
+    stage('one') {
+      enviroment {
+        abc = credentials("CRED")
+
+
+      }
+
       steps {
-        echo 'build'
+        echo "HELLO ${abc_USR}"
+        echo "HELLO ${abc_PSW}"
       }
     }
 
