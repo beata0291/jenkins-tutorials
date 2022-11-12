@@ -1,0 +1,56 @@
+pipeline {
+    agent any
+    parameters{
+        string(name: 'fName', defaultValue: 'Kamil', description: 'tralalal')
+        choice(name: 'city', choices: ['one', 'two', 'three'], description: '')
+    }
+    
+    stages {
+        stage('pre -build') {
+            steps {
+                bat 'echo Pre-build'
+            }
+        }
+        stage('build') {
+            steps {
+                echo '${params.fName}'
+                echo '${params.city}'
+            }
+        }
+        stage('Unit tests') {
+            steps {
+                bat 'echo Running unit tests'
+            }
+        }
+        stage('deploy') {
+            steps {
+                bat 'echo Deploying build'
+            }
+        }
+        stage('Regression tests') {
+            parallel {
+                stage ('chrome') {
+                    steps {
+                        bat 'echo Running E2E tests on chrome'
+                    }
+                }
+                stage ('firefox') {
+                    steps {
+                        bat 'echo Running E2E tests on firefox'
+                    }
+                }
+                stage ('safari') {
+                    steps {
+                        bat 'echo Running E2E tests on safari'
+                    }
+                }   
+            }
+        }
+       
+    }
+ post {
+        always {
+            echo 'Cleanup after everything!'
+        }
+    }
+}
