@@ -1,0 +1,17 @@
+pipeline {
+    agent any
+    environment {
+        abc = "HELLO"
+    }
+    stages {
+        stage('build') {
+            when {
+                environment name: 'abc', value: 'HELLO'
+            }
+            steps {
+                echo 'hELLO bECIA'
+            }
+        }
+    }
+
+}

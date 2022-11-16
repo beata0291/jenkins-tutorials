@@ -1,0 +1,27 @@
+pipeline {
+    agent any
+    environment {
+        fName = "HELLO"
+
+    }
+    stages {
+        stage('build') {
+            steps {
+                   script {
+                         if(env.fName == 'HELLO')
+                        {
+                        echo 'hELLO bECIA'
+                        }
+                        else {
+                        echo 'hELLO Secia'
+                
+                        }
+            
+                }  
+            }
+          
+            
+        }
+    }
+
+}
